@@ -6,21 +6,21 @@ $(document).ready(function() {
         // data += '&username=blah&id=blah1';
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:5000/login',
+            url: 'http://127.0.0.1:5000/api/users/login',
             data: data,
             dataType: "json",
             beforeSend: function() {
                 $(".lbl_status").hide();
             },
             success: function(response) {
-                //alert("a");
-                console.log(response.Success);
+                // alert("a");
+                console.log(response);
                 $('#login')[0].reset();
                 $(".modal-content").addClass("active");
-                document.getElementById("check").innerHTML = response.message;
+                // document.getElementById("check").innerHTML = response.message;
                 //ADD THIS CODE
                 setTimeout(function() {
-                    document.getElementById("check").innerHTML = "";
+                    // document.getElementById("check").innerHTML = "";
                     if (response.Success == "Success!") {
                         if (typeof(Storage) !== "undefined") {
                             localStorage.setItem("token", response.token);
@@ -29,9 +29,9 @@ $(document).ready(function() {
                             localStorage.setItem("_id", response._id);
                             $(".modal-content").removeClass("active");
                         } else {
-                            document.getElementById("check").innerHTML = "Sorry, your browser does not support Web Storage...";
+                            // document.getElementById("check").innerHTML = "Sorry, your browser does not support Web Storage...";
                         }
-                        $('<a href="dashboard.html" id="aa"></a>').appendTo("body");
+                        $('<a href="admin/dashboard.html" id="aa"></a>').appendTo("body");
                         document.getElementById("aa").click();
                     } else {
                         $(".modal-content").removeClass("active");
@@ -39,7 +39,8 @@ $(document).ready(function() {
                 }, 3000);
                 setTimeout(function() {
                     $(".lbl_status").show();
-                }, 8000);
+                }, 1000);
+
 
             },
             error: function() {}
@@ -51,23 +52,23 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:5000/registration',
+            url: 'http://127.0.0.1:5000/api/users/registration',
             data: $('#signup').serialize(),
             dataType: "json",
             beforeSend: function() {
                 $(".lbl_status").hide();
             },
             success: function(response) {
-                //alert("a");
+                alert("You are registered now");
                 //console.log(response.Success);
                 $('#signup')[0].reset();
 
                 $(".modal-content").addClass("active");
-                document.getElementById("check").innerHTML = response.Success;
+                // document.getElementById("check").innerHTML = response.Success;
                 //ADD THIS CODE
                 setTimeout(function() {
 
-                    document.getElementById("check").innerHTML = "";
+                    // document.getElementById("check").innerHTML = "";
                     if (response.Success == "You are regestered,You can login now.") {
                         $('<a href="index.html" id="aa"></a>').appendTo("body");
                         document.getElementById("aa").click();

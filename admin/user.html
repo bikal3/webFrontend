@@ -20,6 +20,7 @@
     <header>
 
         <!-- Sidebar -->
+
         <div class="sidebar-fixed position-fixed">
 
             <a class="logo-wrapper waves-effect">
@@ -36,35 +37,38 @@
                     <i class="fas fa-table mr-3"></i>Post</a>
                 <a href="feedback.html" class="list-group-item list-group-item-action waves-effect">
                     <i class="fas fa-map mr-3"></i>Feedback</a>
-                <a href="#" class="list-group-item list-group-item-action waves-effect">
+                <a href="dashboard.html" class="list-group-item list-group-item-action waves-effect">
                     <i class="fas fa-money-bill-alt mr-3"></i>Setting</a>
             </div>
 
         </div>
     </header>
-    <div class="page-header users-header">
-        <h2 style="margin-left: 50%; ">
-            List of Users
-            <!-- <a href="user_add.html" class="btn btn-success">Add a new</a> -->
-        </h2>
+    <div class="container">
+        <div class="page-header users-header">
+            <h2 style="margin-left: 50%; ">
+                List of Users
+                <!-- <a href="user_add.html" class="btn btn-success">Add a new</a> -->
+            </h2>
+        </div>
+        <div class="alert-info" id="check"></div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">SN</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">User Status</th>
+                    <th scope="col">Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody id="table_data">
+
+            </tbody>
+        </table>
     </div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">SN</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Username</th>
-                <th scope="col">User Status</th>
-                <th scope="col">Action</th>
-
-
-            </tr>
-        </thead>
-        <tbody id="table_data">
-
-        </tbody>
-    </table>
     <!-- Sidebar -->
     <!-- SCRIPTS -->
     <!-- JQuery -->
@@ -80,6 +84,47 @@
         // Animations initialization
         new WOW().init();
     </script>
+    <script>
+        $(document).ready(function() {
+            var data = { //Fetch form data
+                'token': localStorage.getItem("token"),
+                'id': localStorage.getItem("_id")
+            };
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://127.0.0.1:5000/api/admin/userlist',
+                data: data,
+                dataType: "html",
+                success: function(response) {
+                    document.getElementById("table_data").innerHTML = response;
+                    $(".btn-danger").on('click', function() {
+                        var delete_btn = $(this);
+                        data._id = $(this).data("id");
+                        $.ajax({
+                            type: 'POST',
+                            url: 'http://127.0.0.1:5000/api/admin/userdelete',
+                            data: data,
+                            dataType: "json",
+                            success: function(response) {
+                                $("#check").html(response.Success).addClass("alert");
+                                delete_btn.closest("tr").remove();
+                            },
+                            error: function() {
+                                document.getElementById("check").innerHTML = "No data Available";
+                            }
+                        });
+                    })
+                },
+                error: function() {
+                    document.getElementById("table_data").innerHTML = "No data Available";
+                }
+            });
+
+
+        });
+    </script>
+
 </body>
 
 </html>

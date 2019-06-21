@@ -141,29 +141,29 @@
                                     <div class="modal-body">
                                         <div class="md-form form-sm mb-5">
                                             <i class="fas fa-user-tie prefix"></i>
-                                            <input type="text" id="modalLRInput12" class="form-control form-control-sm validate">
-                                            <label data-error="wrong" data-success="right" for="modalLRInput12">Your Name</label>
+                                            <input type="text" id="modalLRInput12" name="name" class="form-control form-control-sm validate">
+                                            <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12">Your Name</label>
                                         </div>
                                         <div class="md-form form-sm mb-5">
                                             <i class="fas fa-envelope prefix"></i>
-                                            <input type="email" id="modalLRInput12" class="form-control form-control-sm validate">
-                                            <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
+                                            <input type="email" id="modalLRInput12" name="email" class="form-control form-control-sm validate">
+                                            <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12">Your email</label>
                                         </div>
                                         <div class="md-form form-sm mb-5">
                                             <i class="fas fa-user prefix"></i>
-                                            <input type="text" id="modalLRInput12" class="form-control form-control-sm validate">
-                                            <label data-error="wrong" data-success="right" for="modalLRInput12">Username</label>
+                                            <input type="text" id="modalLRInput12" name="username" class="form-control form-control-sm validate">
+                                            <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12">Username</label>
                                         </div>
                                         <div class="md-form form-sm mb-5">
                                             <i class="fas fa-lock prefix"></i>
-                                            <input type="password" id="modalLRInput13" class="form-control form-control-sm validate">
-                                            <label data-error="wrong" data-success="right" for="modalLRInput13">Password</label>
+                                            <input type="password" id="modalLRInput13" name="password" class="form-control form-control-sm validate">
+                                            <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput13">Password</label>
                                         </div>
 
                                         <div class="md-form form-sm mb-4">
                                             <i class="fas fa-lock prefix"></i>
-                                            <input type="password" id="modalLRInput14" class="form-control form-control-sm validate">
-                                            <label data-error="wrong" data-success="right" for="modalLRInput14">Repeat password</label>
+                                            <input type="password" id="modalLRInput14" name="passwordConf" class="form-control form-control-sm validate">
+                                            <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput14">Repeat password</label>
                                         </div>
 
                                         <div class="text-center form-sm mt-2">
@@ -352,17 +352,18 @@
             <div class="col-md-7 mb-5">
 
 
-                <form action="#" class="p-5 bg-white">
+                <form id="form1" action="#" class="p-5 bg-white">
 
 
                     <div class="row form-group">
+                        <div class="alert-info" id="check"></div>
                         <div class="col-md-6 mb-3 mb-md-0">
                             <label class="text-black" for="fname">First Name</label>
-                            <input type="text" id="fname" class="form-control">
+                            <input type="text" name="fname" id="fname" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label class="text-black" for="lname">Last Name</label>
-                            <input type="text" id="lname" class="form-control">
+                            <input type="text" name="lname" id="lname" class="form-control">
                         </div>
                     </div>
 
@@ -370,7 +371,7 @@
 
                         <div class="col-md-12">
                             <label class="text-black" for="email">Email</label>
-                            <input type="email" id="email" class="form-control">
+                            <input type="email" name="email" id="email" class="form-control">
                         </div>
                     </div>
 
@@ -378,14 +379,14 @@
 
                         <div class="col-md-12">
                             <label class="text-black" for="subject">Subject</label>
-                            <input type="subject" id="subject" class="form-control">
+                            <input type="subject" name="subject" id="subject" class="form-control">
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label class="text-black" for="message">Message</label>
-                            <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Write your notes or questions here..."></textarea>
+                            <textarea name="message" name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Write your notes or questions here..."></textarea>
                         </div>
                     </div>
 
@@ -432,7 +433,7 @@
             <a href="#" class="pl-3 pr-3" style="color: white"><i class="fab fa-snapchat fa-2x"></i></a>
         </ul>
     </footer>
-    <script src="js/login.js"></script>
+
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -445,7 +446,8 @@
     <script src="js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script src="js/aos.js"></script>
-
+    <script src="js/login.js"></script>
+    <script src="js/contact.js"></script>
     <script src="js/main.js"></script>
 
 </body>
