@@ -14,6 +14,12 @@
     <link href="../css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="../css/style.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/aos.css">
+
+    <link href="../css/mdb.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body class="grey lighten-3">
@@ -50,7 +56,10 @@
                 <!-- <a href="user_add.html" class="btn btn-success">Add a new</a> -->
             </h2>
         </div>
-        <div class="alert-info" id="check"></div>
+        <div id="tabledata">
+
+        </div>
+        <!-- <div class="alert-info" id="check"></div>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -60,62 +69,92 @@
                     <th scope="col">Username</th>
                     <th scope="col">User Status</th>
                     <th scope="col">Action</th>
-
-
                 </tr>
             </thead>
-            <tbody id="table_data">
+            <tbody id="tabledata">
+
 
             </tbody>
-        </table>
+        </table> -->
     </div>
     <!-- Sidebar -->
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../js/mdb.min.js"></script>
-    <!-- Initializations -->
-    <script type="text/javascript">
-        // Animations initialization
-        new WOW().init();
-    </script>
+    <script type="text/javascript" src="../js/token.js"></script>
+    <script type="text/javascript" src="../js/storage.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
     <script>
         $(document).ready(function() {
             var data = { //Fetch form data
-                'token': localStorage.getItem("token"),
-                'id': localStorage.getItem("_id")
+                token: localStorage.getItem("token"),
+                id: localStorage.getItem("_id")
+
             };
 
+
             $.ajax({
-                type: 'GET',
-                url: 'http://127.0.0.1:5000/api/admin/userlist',
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/api/admin/userlist/',
                 data: data,
-                dataType: "html",
-                success: function(response) {
-                    document.getElementById("table_data").innerHTML = response;
-                    $(".btn-danger").on('click', function() {
-                        var delete_btn = $(this);
-                        data._id = $(this).data("id");
+                success: function(res) {
+                    var datas = "";
+                    datas += "<table class='table table-bordered'>";
+                    datas += "<thead>";
+                    datas += "<tr>";
+                    data += "<th scope='col'>SN</th>";
+                    datas += "<th scope='col'>Name</th>";
+                    datas += " <th scope='col'>Email</th>";
+                    datas += "  <th scope='col'>Username</th>";
+                    datas += " <th scope='col'>User Status</th>";
+                    datas += " <th scope='col'>Edit</th>";
+                    datas += " <th scope='col'>Delete</th>";
+                    datas += "  </tr>";
+                    datas += " </thead>";
+                    $.each(res, function(index) {
+                        datas += "  <tbody>";
+                        datas += "<tr>";
+                        datas += "<td>" + res[index].name + "</td>";
+                        datas += "<td>" + res[index].email + "</td>";
+                        datas += "<td>" + res[index].username + "</td>";
+                        datas += "<td>" + res[index].user_status + "</td>";
+                        datas += "<td> <a href='edituser.html?id=" + res[index]._id + "'class='btn btn-primary'><i class='fa fa-edit fa-lg' aria-hidden='true'></i></a></td>";
+                        datas += "<td><button id='delete' value=" + res[index]._id + "><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>";
+                        datas += "</tr>";
+                        datas += "</tbody>";
+                    });
+                    datas += " </table>";
+                    $("#tabledata").append(datas);
+                    $("#tabledata").on('click', '#delete', function() {
+
+                        id = $(this).val();
+
+                        alert(id);
+                        alert(data.token);
                         $.ajax({
-                            type: 'POST',
-                            url: 'http://127.0.0.1:5000/api/admin/userdelete',
-                            data: data,
-                            dataType: "json",
-                            success: function(response) {
-                                $("#check").html(response.Success).addClass("alert");
-                                delete_btn.closest("tr").remove();
+                            type: "POST",
+                            url: "http://127.0.0.1:5000/api/admin/userdelete/" + id,
+                            data: data.id,
+                            success: function(responseData, textStatus, jqXHR) {
+                                console.log(responseData);
+                                alert(responseData.message);
+
                             },
-                            error: function() {
-                                document.getElementById("check").innerHTML = "No data Available";
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log(errorThrown);
+                                alert(errorThrown);
                             }
+
                         });
+                        return false;
+
                     })
+                    console.log(res);
                 },
+
                 error: function() {
                     document.getElementById("table_data").innerHTML = "No data Available";
                 }
@@ -127,4 +166,4 @@
 
 </body>
 
-</html>
+</html>s
