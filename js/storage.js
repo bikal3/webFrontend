@@ -1,3 +1,3 @@
 if (typeof(Storage) == "undefined") {
-    location.replace("/frontend/authenticate.html");
+    location.replace("/index.html");
 }

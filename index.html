@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -60,7 +59,6 @@
                                 <li><a href="#about">About</a></li>
                                 <li><a href="#contact">Contact</a></li>
                                 <li><a href="#" data-toggle="modal" data-target="#modalLRForm">Login</a></li>
-                                <!-- <li><a href="booking.html">Book Online</a></li> -->
                             </ul>
                         </nav>
                     </div>
@@ -423,18 +421,26 @@
             </div>
         </div>
     </div>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick" />
+        <input type="hidden" name="hosted_button_id" value="D5Q5YYZ256XDN" />
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+        <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+    </form>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D5Q5YYZ256XDN&source=url">Donate </button>
+
     <footer>
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
             <a href="https://mdbootstrap.com/education/bootstrap/" style="color: whitesmoke"> info@travelnepal.com</a>
-        </div>
-        <ul>
-            <a href="#" class="pl-0 pr-3" style="color: white"><i class="fab fa-facebook fa-2x"></i></i></a>
-            <a href="#" class="pl-3 pr-3" style="color: white"><i class="fab fa-twitter fa-2x"></i></a>
-            <a href="#" class="pl-3 pr-3" style="color: white"><i class="fab fa-snapchat fa-2x"></i></a>
-        </ul>
+    </div>
+    <ul>
+        <a href="#" class="pl-0 pr-3" style="color: white"><i class="fab fa-facebook fa-2x"></i></i></a>
+        <a href="#" class="pl-3 pr-3" style="color: white"><i class="fab fa-twitter fa-2x"></i></a>
+        <a href="#" class="pl-3 pr-3" style="color: white"><i class="fab fa-snapchat fa-2x"></i></a>
+    </ul>
     </footer>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/jquery-migrate-3.0.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/popper.min.js"></script>

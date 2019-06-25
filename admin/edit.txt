@@ -1,0 +1,31 @@
+
+  // $(document).ready(function() {
+        //     // var id = "";
+        //     // var searchParams = new URLSearchParams(window.location.search);
+        //     // if (searchParams.has('id')) {
+        //     //     id = searchParams.get('id');
+        //     // }
+        //     var data = {
+        //         'token': localStorage.getItem("token"),
+        //         'id': localStorage.getItem("_id"),
+        //         '_id': id
+
+        //     };
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: 'http://127.0.0.1:3000/api/admin/useredit/' + id,
+        //         data: data,
+        //         dataTypeL: "json",
+        //         success: function(response) {
+        //             console.log(response);
+        //         },
+        //         error: function() {
+
+        //         }
+
+
+
+        //     })
+
+
+        // })

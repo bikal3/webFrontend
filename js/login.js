@@ -22,6 +22,7 @@ $(document).ready(function() {
                 setTimeout(function() {
                     // document.getElementById("check").innerHTML = "";
                     if (response.Success == "Success!") {
+
                         if (typeof(Storage) !== "undefined") {
                             localStorage.setItem("token", response.token);
                             localStorage.setItem("admin", response.admin);
@@ -36,10 +37,10 @@ $(document).ready(function() {
                     } else {
                         $(".modal-content").removeClass("active");
                     }
-                }, 3000);
+                });
                 setTimeout(function() {
                     $(".lbl_status").show();
-                }, 1000);
+                });
 
 
             },
@@ -75,10 +76,10 @@ $(document).ready(function() {
                     } else {
                         $(".modal-content").removeClass("active");
                     }
-                }, 5000);
+                });
                 setTimeout(function() {
                     $(".lbl_status").show();
-                }, 8000);
+                });
 
             },
             error: function() {}

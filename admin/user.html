@@ -51,7 +51,7 @@
     </header>
     <div class="container">
         <div class="page-header users-header">
-            <h2 style="margin-left: 50%; ">
+            <h2 style="margin-left: 50%;">
                 List of Users
                 <!-- <a href="user_add.html" class="btn btn-success">Add a new</a> -->
             </h2>
@@ -59,39 +59,25 @@
         <div id="tabledata">
 
         </div>
-        <!-- <div class="alert-info" id="check"></div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">SN</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">User Status</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody id="tabledata">
-
-
-            </tbody>
-        </table> -->
     </div>
     <!-- Sidebar -->
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="../js/token.js"></script>
-    <script type="text/javascript" src="../js/storage.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/token.js"></script>
+    <script type="text/javascript" src="../js/storage.js"></script>
 
 
 
     <script>
+        var tok;
         $(document).ready(function() {
             var data = { //Fetch form data
                 token: localStorage.getItem("token"),
-                id: localStorage.getItem("_id")
+                id: localStorage.getItem("_id"),
+                tok: localStorage.getItem("token")
 
             };
 
@@ -122,25 +108,27 @@
                         datas += "<td>" + res[index].username + "</td>";
                         datas += "<td>" + res[index].user_status + "</td>";
                         datas += "<td> <a href='edituser.html?id=" + res[index]._id + "'class='btn btn-primary'><i class='fa fa-edit fa-lg' aria-hidden='true'></i></a></td>";
-                        datas += "<td><button id='delete' value=" + res[index]._id + "><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>";
+                        datas += "<td><button   type='button' class='btn btn-danger' id='delete' value=" + res[index]._id + "><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>";
                         datas += "</tr>";
                         datas += "</tbody>";
                     });
                     datas += " </table>";
                     $("#tabledata").append(datas);
                     $("#tabledata").on('click', '#delete', function() {
-
-                        id = $(this).val();
-
-                        alert(id);
-                        alert(data.token);
+                        var data = {
+                            _id: $(this).val(),
+                            token: localStorage.getItem("token"),
+                            id: localStorage.getItem("_id")
+                        };
                         $.ajax({
                             type: "POST",
-                            url: "http://127.0.0.1:5000/api/admin/userdelete/" + id,
-                            data: data.id,
+                            url: "http://127.0.0.1:5000/api/admin/userdelete/",
+                            data: data,
                             success: function(responseData, textStatus, jqXHR) {
                                 console.log(responseData);
                                 alert(responseData.message);
+                                console.log(data);
+                                location.href = "user.html"
 
                             },
                             error: function(jqXHR, textStatus, errorThrown) {
@@ -166,4 +154,4 @@
 
 </body>
 
-</html>s
+</html>

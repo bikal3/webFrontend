@@ -40,63 +40,106 @@
         </div>
 
     </div>
-    <div class="container">
-        <div class="page-header users-header">
-            <h2 style="margin-left: 50%; ">
-                Edit User
-                <!-- <a href="user_add.html" class="btn btn-success">Add a new</a> -->
-            </h2>
-        </div>
-        <form id="signup" method="POST">
-            <div class="modal-body">
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-user-tie prefix"></i>
-                    <input type="text" placeholder="Your Name" id="modalLRInput12" name="name" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status"></label>
-                </div>
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-envelope prefix"></i>
-                    <input type="email" placeholder="Your email" id="modalLRInput12" name="email" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
-                </div>
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-user prefix"></i>
-                    <input type="text" placeholder="Username" id="modalLRInput12" name="username" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
-                </div>
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-lock prefix"></i>
-                    <input type="password" placeholder="Password" id="modalLRInput13" name="password" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput13"></label>
-                </div>
-
-                <div class="md-form form-sm mb-4">
-                    <i class="fas fa-lock prefix"></i>
-                    <input type="password" placeholder="Repeat password" id="modalLRInput14" name="passwordConf" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput14"></label>
-                </div>
-
-                <div class="text-center form-sm mt-2">
-                    <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
-                </div>
-
+    <div class="container-fluid" style="border:1px solid #cecece;">
+        <div class="container">
+            <div class="page-header users-header">
+                <h2 style="margin-left: 50%; margin-top: 10% ">
+                    Edit User
+                    <!-- <a href="user_add.html" class="btn btn-success">Add a new</a> -->
+                </h2>
             </div>
-        </form>
+            <form id="updateuserform" method="POST">
+                <input type="hidden" id="_id" name="_id" value="">
+                <fieldset>
+                    <div class="modal-body">
+                        <div class="md-form form-sm mb-5">
+                            <i class="fas fa-user-tie prefix"></i>
+                            <input type="text" placeholder="Your name " id="name" name="name" value="" class="form-control form-control-sm validate">
+                            <label data-error="wrong" data-success="right" class="lbl_status"></label>
+                        </div>
+                        <div class="md-form form-sm mb-5">
+                            <i class="fas fa-envelope prefix"></i>
+                            <input type="email" placeholder="Your email" id="email" name="email" value="" class="form-control form-control-sm validate">
+                            <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
+                        </div>
+                        <div class="md-form form-sm mb-5">
+                            <i class="fas fa-user prefix"></i>
+                            <input type="text" placeholder="Username" id="username" name="username" value="" class="form-control form-control-sm validate">
+                            <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
+                        </div>
+                        <div class="text-center form-sm mt-2">
+                            <button class="btn btn-info" type="submit">Update<i class="fas fa-sign-in ml-1"></i></button>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
     <!-- Sidebar -->
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../js/mdb.min.js"></script>
-    <!-- Initializations -->
-    <script type="text/javascript">
-        // Animations initialization
-        new WOW().init();
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/token.js"></script>
+    <script type="text/javascript" src="../js/storage.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var id = "";
+            var searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('id')) {
+                id = searchParams.get('id');
+            }
+            var data = {
+                'token': localStorage.getItem("token"),
+                'id': localStorage.getItem("_id"),
+                '_id': id
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/api/admin/useredit/',
+                data: data,
+                success: function(response) {
+                    // console.log(response);
+                    $('#name').val(response.name);
+                    $('#email').val(response.email);
+                    $('#username').val(response.username);
+                    $('#password').val(response.password);
+                    $('#passwordConf').val(response.passwordConf);
+                },
+                error: function() {}
+            })
+            $("#updateuserform").submit(function(event) {
+                event.preventDefault();
+                var _form = $(this);
+                var id = "";
+                var searchParams = new URLSearchParams(window.location.search);
+                if (searchParams.has('id')) {
+                    id = searchParams.get('id');
+                };
+                var update = { //Fetch form data
+
+                    'token': localStorage.getItem("token"),
+                    'id': localStorage.getItem("_id"),
+                    '_id': id,
+                    'username': $('input[name=username]').val(),
+                    'email': $('input[name=email]').val(),
+                    'name': $('input[name=name]').val()
+                };
+                $.ajax({
+                    type: 'PUT',
+                    url: 'http://127.0.0.1:5000/api/admin/userupdate/',
+                    data: update,
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function() {
+                        alert("update failed")
+                    }
+                })
+            })
+        })
     </script>
 </body>
 
