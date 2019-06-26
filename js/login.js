@@ -32,7 +32,9 @@ $(document).ready(function() {
                         } else {
                             // document.getElementById("check").innerHTML = "Sorry, your browser does not support Web Storage...";
                         }
-                        $('<a href="admin/dashboard.html" id="aa"></a>').appendTo("body");
+                        $(
+                            '<a href="admin/dashboard.html" id="aa"></a>').appendTo("body");
+                        // '<a href="user/userdashboard.html" id="aa"></a>').appendTo("body");
                         document.getElementById("aa").click();
                     } else {
                         $(".modal-content").removeClass("active");

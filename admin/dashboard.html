@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+    <title>Travel Nepal</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -14,105 +14,145 @@
     <link href="../css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="../css/style.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/aos.css">
+
+    <link href="../css/mdb.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body class="grey lighten-3">
+    <header>
 
-    <!-- Sidebar -->
-    <div class="sidebar-fixed position-fixed">
+        <!-- Sidebar -->
 
-        <a class="logo-wrapper waves-effect">
-            <img src="" class="img-fluid" alt="">
-        </a>
+        <div class="sidebar-fixed position-fixed">
 
-        <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item active waves-effect">
-                <i class="fas fa-chart-pie mr-3"></i>Dashboard
+            <a class="logo-wrapper waves-effect">
+                <img src="" class="img-fluid" alt="">
             </a>
-            <a href="user.html" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-user mr-3"></i>User</a>
-            <a href="dashboard.html" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-table mr-3"></i>Post</a>
-            <a href="feedback.html" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-map mr-3"></i>Feedback</a>
-            <a href="#" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-money-bill-alt mr-3"></i>Setting</a>
-        </div>
 
-    </div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item active waves-effect">
+                    <i class="fas fa-chart-pie mr-3"></i>Dashboard
+                </a>
+                <a href="user.html" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fas fa-user mr-3"></i>User</a>
+                <a href="dashboard.html" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fas fa-table mr-3"></i>Post</a>
+                <a href="feedback.html" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fas fa-map mr-3"></i>Feedback</a>
+                <a href="dashboard.html" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fas fa-money-bill-alt mr-3"></i>Setting</a>
+            </div>
+
+        </div>
+    </header>
     <div class="container">
         <div class="page-header users-header">
-            <h2 style="margin-left: 50%; ">
+            <h2 style="margin-left: 50%;">
                 List of Users
                 <!-- <a href="user_add.html" class="btn btn-success">Add a new</a> -->
             </h2>
         </div>
-        <form id="signup" method="POST">
-            <div class="modal-body">
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-user-tie prefix"></i>
-                    <input type="text" placeholder="Your Name" id="modalLRInput12" name="name" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status"></label>
-                </div>
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-envelope prefix"></i>
-                    <input type="email" placeholder="Your email" id="modalLRInput12" name="email" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
-                </div>
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-user prefix"></i>
-                    <input type="text" placeholder="Username" id="modalLRInput12" name="username" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
-                </div>
-                <div class="md-form form-sm mb-5">
-                    <i class="fas fa-lock prefix"></i>
-                    <input type="password" placeholder="Password" id="modalLRInput13" name="password" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput13"></label>
-                </div>
+        <div id="tabledata">
 
-                <div class="md-form form-sm mb-4">
-                    <i class="fas fa-lock prefix"></i>
-                    <input type="password" placeholder="Repeat password" id="modalLRInput14" name="passwordConf" class="form-control form-control-sm validate">
-                    <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput14"></label>
-                </div>
-
-                <div class="text-center form-sm mt-2">
-                    <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
-                    <tr>
-                        <th scope="col">1</th>
-                        <th scope="col">Bikal</th>
-                        <th scope="col">bikal@example.com</th>
-                        <th scope="col">9868834055</th>
-                        <th scope="col">my name is bikal shrestha</th>
-                        <th scope="col">
-                            <a href="#" class="btn btn-primary"><i
-                            class="fa fa-pencil fa-lg"
-                            aria-hidden="true"></i>Edit</a>
-                            <a href="#;" class="btn btn-danger"><i
-                            class="fa fa-trash fa-lg" aria-hidden="true"></i>Delete</a></th>
-
-                    </tr>
-
-                </div>
-
-            </div>
-        </form>
+        </div>
     </div>
     <!-- Sidebar -->
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../js/mdb.min.js"></script>
-    <!-- Initializations -->
-    <script type="text/javascript">
-        // Animations initialization
-        new WOW().init();
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/token.js"></script>
+    <script type="text/javascript" src="../js/storage.js"></script>
+
+
+
+    <script>
+        var tok;
+        $(document).ready(function() {
+            var data = { //Fetch form data
+                token: localStorage.getItem("token"),
+                id: localStorage.getItem("_id"),
+
+            };
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/api/admin/postlist/',
+                data: data,
+                success: function(res) {
+                    var datas = "";
+                    datas += "<table class='table table-bordered'>";
+                    datas += "<thead>";
+                    datas += "<tr>";
+                    data += "<th scope='col'>SN</th>";
+                    datas += "<th scope='col'>Title</th>";
+                    datas += " <th scope='col'>Location</th>";
+                    datas += "  <th scope='col'>Description</th>";
+                    datas += " <th scope='col'>Image</th>";
+                    datas += " <th scope='col'>Username</th>";
+                    datas += " <th scope='col'>Edit</th>";
+                    datas += " <th scope='col'>Delete</th>";
+                    datas += "  </tr>";
+                    datas += " </thead>";
+                    $.each(res, function(index) {
+                        datas += "  <tbody>";
+                        datas += "<tr>";
+                        datas += "<td>" + res[index].title + "</td>";
+                        datas += "<td>" + res[index].location + "</td>";
+                        datas += "<td>" + res[index].description + "</td>";
+                        datas += "<td>" + res[index].image + "</td>";
+                        datas += "<td>" + res[index].user + "</td>";
+                        datas += "<td> <a href='editpost.html?id=" + res[index]._id + "'class='btn btn-primary'><i class='fa fa-edit fa-lg' aria-hidden='true'></i></a></td>";
+                        datas += "<td><button   type='button' class='btn btn-danger' id='delete' value=" + res[index]._id + "><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>";
+                        datas += "</tr>";
+                        datas += "</tbody>";
+                    });
+                    datas += " </table>";
+                    $("#tabledata").append(datas);
+                    $("#tabledata").on('click', '#delete', function() {
+                        var data = {
+                            _id: $(this).val(),
+                            token: localStorage.getItem("token"),
+                            id: localStorage.getItem("_id")
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "http://127.0.0.1:5000/api/admin/postdelete/",
+                            data: data,
+                            success: function(responseData, textStatus, jqXHR) {
+                                console.log(responseData);
+                                alert(responseData.message);
+                                console.log(data);
+                                location.href = "dashboard.html"
+
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.log(errorThrown);
+                                alert(errorThrown);
+                            }
+
+                        });
+                        return false;
+
+                    })
+                    console.log(res);
+                },
+
+                error: function() {
+                    document.getElementById("table_data").innerHTML = "No data Available";
+                }
+            });
+
+
+        });
     </script>
+
 </body>
 
 </html>
