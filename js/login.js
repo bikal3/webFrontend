@@ -22,6 +22,7 @@ $(document).ready(function() {
                 setTimeout(function() {
                     // document.getElementById("check").innerHTML = "";
                     if (response.Success == "Success!") {
+                        console.log(response.admin)
 
                         if (typeof(Storage) !== "undefined") {
                             localStorage.setItem("token", response.token);
@@ -29,12 +30,13 @@ $(document).ready(function() {
                             localStorage.setItem("username", response.username);
                             localStorage.setItem("_id", response._id);
                             $(".modal-content").removeClass("active");
+                        } else {}
+                        if (response.admin == true) {
+                            $('<a href="admin/dashboard.html" id="aa"></a>').appendTo("body");
                         } else {
-                            // document.getElementById("check").innerHTML = "Sorry, your browser does not support Web Storage...";
+                            $('<a href="user/userdashboard.html" id="aa"></a>').appendTo("body");
                         }
-                        $(
-                            // '<a href="admin/dashboard.html" id="aa"></a>').appendTo("body");
-                            '<a href="user/userdashboard.html" id="aa"></a>').appendTo("body");
+
                         document.getElementById("aa").click();
                     } else {
                         $(".modal-content").removeClass("active");

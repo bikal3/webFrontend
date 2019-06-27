@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 
     <link rel="stylesheet" href="../fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: #000;" href="#">
+                    <a class="nav-link" style="color: #000;" href="userdashboard.html">
                         <i class="fab fa-instagram"></i> Post</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -55,67 +55,51 @@
         </div>
     </nav>
     <!--Card image-->
+
     <div class="container">
         <div class="view">
-            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(112).jpg" href="addpost.html" class="card-img-top" alt="photo">
+            <img src="" id="image" href="addpost.html" class="card-img-top" alt="photo">
             <a href="#">
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
 
-        <!--Card content-->
-        <div class="card-body text-left">
-            <!--Title-->
-            <h2 class="card-title"> Username: </h2>
-            <h3 class="col-ml-4">Location</h3>
+        <!--Title-->
+        <div class="card">
+            <h3 id="username" value=""> </h3>
+            <h3 class="col-ml-4" id="location" value=""></h3>
             <!--Text-->
-            <p class="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                quia voluptas.</p>
+            <p class="card-text" id="description"></p>
         </div>
 
     </div>
     <!--/.Card-->
+
+    <div class="mt-5"></div>
     <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h2 class="page-header">Comments</h2>
-                <section class="comment-list">
-                    <!-- First Comment -->
-                    <article class="row">
-                        <div class="col-md-2 col-sm-2 hidden-xs">
-                            <figure class="thumbnail">
-                                <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
-                                <figcaption class="text-center">usernam`e</figcaption>
-                            </figure>
-                        </div>
-                        <div class="col-md-10 col-sm-10">
-                            <div class="panel panel-default arrow left">
-                                <div class="panel-body">
-                                    <div class="comment-post">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </section>
-            </div>
-        </div>
+        <h2 class="page-header">Comments</h2>
     </div>
+
+    <div id="comment"></div>
+
     <div class="container">
-        <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
-            <div class="form-group shadow-textarea">
-                <label for="exampleFormControlTextarea6">Write Your Comment Here</label>
-                <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Comment"></textarea>
+        <form id="commentform">
+            <div class="form-group">
+                <label for="">Write Your Comment Here</label>
+                <textarea class="form-control rounded-0" id="commentsection" placeholder="comment" rows="2"></textarea>
             </div>
-        </div>
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Post" class="btn btn-primary py-2 px-4 text-white">
+                </div>
+            </div>
+        </form>
     </div>
     <footer>
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
             <a href="https://mdbootstrap.com/education/bootstrap/" style="color: whitesmoke"> info@travelnepal.com</a>
         </div>
+
         <ul>
             <a href="#" class="pl-0 pr-3" style="color: white"><i class="fab fa-facebook fa-2x"></i></i></a>
             <a href="#" class="pl-3 pr-3" style="color: white"><i class="fab fa-twitter fa-2x"></i></a>
@@ -130,6 +114,112 @@
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="../js/mdb.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../js/token.js"></script>
+    <script type="text/javascript" src="../js/storage.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var url = "http://localhost:5000/api/postDetail/";
+            var searchParams = new URLSearchParams(window.location.search);
+
+            if (searchParams.has('id')) {
+                url = url + searchParams.get('id');
+            }
+            var data = {
+                'token': localStorage.getItem("token"),
+                'id': localStorage.getItem("_id"),
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'JSON',
+                success: function(response) {
+                    console.log(response);
+                    $('#username').html(response.post.user);
+                    $('#location').html(response.post.location);
+                    $('#description').html(response.post.description);
+                    $('#image').attr("src", "http://localhost:5000/" + response.post.image);
+                    var datas = "";
+                    $.each(response.comments, function(index) {
+
+                        datas += "<div class='container'>";
+                        datas += "<div class='row'>";
+                        datas += "<div class='col-md-8'>";
+                        datas += "<section class='comment-list'>";
+                        datas += "<article class='row'>";
+                        datas += "<div class='col-md-2 col-sm-2 hidden-xs'>";
+                        datas += "<figure class='thumbnail'>";
+                        datas += "<img class='img-fluid' src='../images/userprofile.png' />";
+                        datas += "<figcaption class='text-center'>" + response.comments[index].user + "</figcaption>";
+                        datas += "</figure>";
+                        datas += " </div>";
+                        datas += "<div class='col-md-10 col-sm-10'>";
+                        datas += "<div class='card arrow left'>";
+                        datas += "<div class='card-body'>";
+                        datas += "<p>" + response.comments[index].comment + " </p>";
+                        datas += " </div>";
+                        datas += " </div>";
+                        datas += " </div>";
+                        datas += "  </article>";
+                        datas += " </section>";
+                        datas += "  </div>";
+                        datas += " </div>";
+                        datas += "  </div>";
+                    })
+                    $("#comment").append(datas);
+                },
+                error: function() {
+                    alert("vayena")
+                }
+            });
+            $("#commentform").submit(function(e) {
+                e.preventDefault();
+                var searchParams = new URLSearchParams(window.location.search);
+                var post_id = "";
+                if (searchParams.has('id')) {
+                    post_id = searchParams.get('id');
+                }
+                var comment = {
+                    'token': localStorage.getItem("token"),
+                    '_id': localStorage.getItem("_id"),
+                    'post_id': post_id,
+                    'username': localStorage.getItem("username"),
+                    'comment': $("#commentsection").val(),
+                };
+                // alert(comment.post_id);
+                // alert(comment.token);
+                // alert(comment.id)
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:5000/api/users/comment/',
+                    data: comment,
+                    dataType: 'JSON',
+                    success: function(response) {
+                        // _form[0].reset();
+                        console.log(response);
+                        alert("hurray")
+                            // if (response.redirect !== undefined && response.redirect) {
+                            //     window.location.href = response.redirect_url;
+                            // }
+                            // location.href = "postcomment.html ? id = _id";
+                    },
+                    error: function(error) {
+                        console.log(error);
+
+                        alert("laa vayena aabo k garne")
+                    }
+                })
+            })
+
+
+
+        })
+    </script>
 </body>
 
 </html>
