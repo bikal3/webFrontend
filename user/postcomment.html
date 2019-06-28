@@ -47,8 +47,8 @@
                     <a class="nav-link dropdown-toggle" style="color: #000;" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user"></i> Profile </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="#">My account</a>
-                        <a class="dropdown-item" href="#">Log out</a>
+                        <a class="dropdown-item" href="userprofile.html">My account</a>
+                        <a class="dropdown-item" id="logout" href="javascript:void(0);">Log out</a>
                     </div>
                 </li>
             </ul>
@@ -119,11 +119,16 @@
 
     <script type="text/javascript" src="../js/token.js"></script>
     <script type="text/javascript" src="../js/storage.js"></script>
+    <script type="text/javascript" src="../js/logout.js"></script>
 
     <script>
         $(document).ready(function() {
             var url = "http://localhost:5000/api/postDetail/";
             var searchParams = new URLSearchParams(window.location.search);
+            var post_id = "";
+            if (searchParams.has('id')) {
+                post_id = searchParams.get('id');
+            }
 
             if (searchParams.has('id')) {
                 url = url + searchParams.get('id');
@@ -180,10 +185,7 @@
             $("#commentform").submit(function(e) {
                 e.preventDefault();
                 var searchParams = new URLSearchParams(window.location.search);
-                var post_id = "";
-                if (searchParams.has('id')) {
-                    post_id = searchParams.get('id');
-                }
+
                 var comment = {
                     'token': localStorage.getItem("token"),
                     '_id': localStorage.getItem("_id"),
@@ -206,7 +208,7 @@
                             // if (response.redirect !== undefined && response.redirect) {
                             //     window.location.href = response.redirect_url;
                             // }
-                            // location.href = "postcomment.html ? id = _id";
+                        location.href = "postcomment.html?id=" + post_id;
                     },
                     error: function(error) {
                         console.log(error);

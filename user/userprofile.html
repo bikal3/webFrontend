@@ -45,14 +45,116 @@
                         <i class="fas fa-user"></i> Profile </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
                         <a class="dropdown-item" href="userprofile.html">My account</a>
-                        <a class="dropdown-item" href="#">Log out</a>
+                        <a class="dropdown-item" id="logout" href="javascript:void(0);">Log out</a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
-    <!--/.Navbar -->
-    <!--Grid row-->
+    <!--/.Navbar --
+        <!-- Material form register -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+                                <div class="image-container">
+                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                </div>
+                                <div class="userData ml-3 mt-5">
+                                    <h2 class="d-block" id="user" style="font-size: 1.5rem; font-weight: bold">Username</a>
+                                    </h2>
+                                </div>
+                                <div class="ml-auto">
+                                    <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                </div>
+
+                            </div>
+                            <div class="middle">
+                                <input type="file" onchange="readURL(this);" id="image" class="btn btn-primary" id="btnChangePicture" value="" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Post</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content ml-1" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Full Name</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                <input type="text" id="name" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Email</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                <input type="text" id="email" value="bikal3.bs@email.com" class="form-control">
+                                            </div>
+                                        </div>
+                                        <hr />
+
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Username</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                <input type="text" id="username" value="Bikal3" class="form-control">
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Something</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                Something
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-3 col-5">
+                                                <button id="update" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </div>
+                                        <hr />
+
+
+
+                                    </div>
+                                    <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                        Facebook, Google, Twitter Account that are connected to this account
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
             <a href="https://mdbootstrap.com/education/bootstrap/" style="color: whitesmoke"> info@travelnepal.com</a>
@@ -71,6 +173,76 @@
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="../js/mdb.min.js"></script>
+    <script type="text/javascript" src="../js/logout.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#imgProfile')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            let imageName = '';
+            var data = {
+                'token': localStorage.getItem("token"),
+                '_id': localStorage.getItem("_id"),
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/api/users/profile',
+                data: data,
+                dataType: 'JSON',
+                success: function(response) {
+                    console.log(response);
+                    $('#user').html(response.name);
+                    $('#name').val(response.name);
+                    $('#username').val(response.username);
+                    $('#email').val(response.email);
+                    $('#image').attr("src", 'http://127.0.0.1:5000/api/' + response.image);
+                }
+            })
+
+            $.ajax({
+                type: 'PUT',
+                url: 'http://127.0.0.1:5000/api/users/profile',
+
+            })
+            $("#image").on('change', function() {
+                let formData = new FormData();
+                let files = $("#image").get(0).files;
+                if (files.length > 0) {
+                    formData.append("imageName", files[0]);
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:5000/api/uploadimage',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    dataType: 'JSON',
+                    success: function(response) {
+                        alert(response.filename);
+                        imageName = response.filename;
+                    },
+                    error: function() {
+                        alert("Image upload failed!");
+                    }
+                });
+            });
+
+
+        })
+    </script>
 </body>
 
 </html>
