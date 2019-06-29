@@ -1713,3 +1713,51 @@ footer p {
     opacity: 0.6;
     align-self: center;
 }
+
+.view-card {
+    padding: 30px !important;
+}
+
+.author-img {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.username {
+    text-transform: uppercase;
+}
+
+.author-details {
+    background-color: #e8e9f9;
+    margin-top: 35px;
+}
+
+.view-img {
+    overflow: hidden;
+    position: relative;
+    max-height: 600px;
+    height: 600px;
+}
+
+@media (max-width: 991px) {
+    .view-img {
+        height: 277px;
+    }
+}
+
+.img {
+    height: inherit;
+    width: 100%;
+}
+
+.view-img img {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+}
+
+.location {
+    text-transform: uppercase;
+}

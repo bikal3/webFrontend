@@ -28,7 +28,7 @@
 
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark ">
-        <a class="navbar-brand" style="color: #000;" href="#">Travel Nepal</a>
+        <a class="navbar-brand" style="color: #000;" href="userdashboard.html">Travel Nepal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,33 +56,57 @@
     </nav>
     <!--Card image-->
 
-    <div class="container">
-        <div class="view">
-            <img src="" id="image" href="addpost.html" class="card-img-top" alt="photo">
-            <a href="#">
-                <div class="mask rgba-white-slight"></div>
-            </a>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12 col-lg-3 col-sm-12 col-12 mt-5">
+                <div class="card view-card">
+                    <div class="author-img">
+                        <img src="../images/person_1.jpg" class="img">
+                    </div>
+                    <div class="author-details p-4">
+                        <h3 id="username" class="username text-center" value=""> </h3>
+                        <p class="text-center">
+                            Kotha Smith is an enthusiastic and passionate Story Teller. He loves to do different home-made things and share to the world.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-9 col-sm-12 col-12 mt-5">
+                <div class="view-img">
+                    <img src="" id="image" href="addpost.html" class="img" alt="photo">
+                    <a href="#">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <!--Title-->
+                <div class="card view-card">
+
+                    <h3 class="col-ml-4 location" id="location" value=""></h3>
+                    <hr>
+                    <!--Text-->
+                    <p class="card-text text-justify" id="description"></p>
+                </div>
+            </div>
+
         </div>
 
-        <!--Title-->
-        <div class="card">
-            <h3 id="username" value=""> </h3>
-            <h3 class="col-ml-4" id="location" value=""></h3>
-            <!--Text-->
-            <p class="card-text" id="description"></p>
-        </div>
+
+
+
 
     </div>
     <!--/.Card-->
 
     <div class="mt-5"></div>
-    <div class="container">
+    <div class="container-fluid">
         <h2 class="page-header">Comments</h2>
     </div>
 
     <div id="comment"></div>
 
-    <div class="container">
+    <div class="container-fluid">
         <form id="commentform">
             <div class="form-group">
                 <label for="">Write Your Comment Here</label>
@@ -152,15 +176,15 @@
                     var datas = "";
                     $.each(response.comments, function(index) {
 
-                        datas += "<div class='container'>";
+                        datas += "<div class='container-fluid'>";
                         datas += "<div class='row'>";
                         datas += "<div class='col-md-8'>";
                         datas += "<section class='comment-list'>";
                         datas += "<article class='row'>";
-                        datas += "<div class='col-md-2 col-sm-2 hidden-xs'>";
+                        datas += "<div class='col-md-1 col-sm-1 hidden-xs'>";
                         datas += "<figure class='thumbnail'>";
                         datas += "<img class='img-fluid' src='../images/userprofile.png' />";
-                        datas += "<figcaption class='text-center'>" + response.comments[index].user + "</figcaption>";
+                        datas += "<figcaption class='text-center'>" + response.comments[index].username + "</figcaption>";
                         datas += "</figure>";
                         datas += " </div>";
                         datas += "<div class='col-md-10 col-sm-10'>";
@@ -190,7 +214,7 @@
                     'token': localStorage.getItem("token"),
                     '_id': localStorage.getItem("_id"),
                     'post_id': post_id,
-                    'username': localStorage.getItem("username"),
+                    'user': localStorage.getItem("_id"),
                     'comment': $("#commentsection").val(),
                 };
                 // alert(comment.post_id);

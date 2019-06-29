@@ -62,7 +62,7 @@
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
                                 <div class="image-container">
-                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                    <img src="" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                 </div>
                                 <div class="userData ml-3 mt-5">
                                     <h2 class="d-block" id="user" style="font-size: 1.5rem; font-weight: bold">Username</a>
@@ -97,7 +97,7 @@
                                                 <label style="font-weight:bold;">Full Name</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                <input type="text" id="name" value="" class="form-control">
+                                                <input type="text" id="name" name="name" value="" class="form-control">
                                             </div>
                                         </div>
                                         <hr />
@@ -107,7 +107,7 @@
                                                 <label style="font-weight:bold;">Email</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                <input type="text" id="email" value="bikal3.bs@email.com" class="form-control">
+                                                <input type="text" id="email" name="email" value="" class="form-control">
                                             </div>
                                         </div>
                                         <hr />
@@ -118,7 +118,7 @@
                                                 <label style="font-weight:bold;">Username</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                <input type="text" id="username" value="Bikal3" class="form-control">
+                                                <input type="text" id="username" name="username" value="" class="form-control">
                                             </div>
                                         </div>
                                         <hr />
@@ -133,7 +133,7 @@
                                         <hr />
                                         <div class="row">
                                             <div class="col-sm-3 col-md-3 col-5">
-                                                <button id="update" class="btn btn-primary">Update</button>
+                                                <button id="updateuser" class="btn btn-primary">Update</button>
                                             </div>
                                         </div>
                                         <hr />
@@ -196,6 +196,7 @@
                 'token': localStorage.getItem("token"),
                 '_id': localStorage.getItem("_id"),
             };
+
             $.ajax({
                 type: 'POST',
                 url: 'http://127.0.0.1:5000/api/users/profile',
@@ -207,15 +208,52 @@
                     $('#name').val(response.name);
                     $('#username').val(response.username);
                     $('#email').val(response.email);
-                    $('#image').attr("src", 'http://127.0.0.1:5000/api/' + response.image);
+                    $('#imgProfile').attr('src', 'http://localhost:5000/' + response.image);
                 }
             })
 
-            $.ajax({
-                type: 'PUT',
-                url: 'http://127.0.0.1:5000/api/users/profile',
+            $('#updateuser').on('click', function(e) {
+                e.preventDefault();
+
+                if (imageName == '') {
+                    var dataupdate = {
+                        'token': localStorage.getItem("token"),
+                        'id': localStorage.getItem("_id"),
+                        'username': $('input[name=username]').val(),
+                        'email': $('input[name=email]').val(),
+                        'name': $('input[name=name]').val(),
+
+                    };
+                } else {
+                    var dataupdate = {
+                        'token': localStorage.getItem("token"),
+                        'id': localStorage.getItem("_id"),
+                        'username': $('input[name=username]').val(),
+                        'email': $('input[name=email]').val(),
+                        'name': $('input[name=name]').val(),
+                        'image': imageName
+                    };
+                }
+
+                $.ajax({
+                    type: 'PUT',
+                    url: 'http://127.0.0.1:5000/api/users/userupdate/',
+                    data: dataupdate,
+                    success: function(response) {
+                        console.log(response);
+                        alert('Updated Succefully')
+                            // location.href('userprofile.html');
+                    },
+                    error: function() {
+
+                        alert(response.name);
+                    }
+
+
+                })
 
             })
+
             $("#image").on('change', function() {
                 let formData = new FormData();
                 let files = $("#image").get(0).files;
@@ -231,8 +269,8 @@
                     data: formData,
                     dataType: 'JSON',
                     success: function(response) {
-                        alert(response.filename);
-                        imageName = response.filename;
+                        alert(response);
+                        imageName = response;
                     },
                     error: function() {
                         alert("Image upload failed!");
