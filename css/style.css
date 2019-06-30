@@ -1761,3 +1761,55 @@ footer p {
 .location {
     text-transform: uppercase;
 }
+
+.comment-username {
+    color: #1565c0;
+    font-weight: bold;
+}
+
+.comment-list p {
+    word-wrap: break-word;
+    font-size: 100%;
+}
+
+.thumbnail {
+    float: left;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.thumbnail-img {
+    width: 100px;
+    height: 100px;
+}
+
+@media (max-width: 850px) {
+    .comment-list p {
+        font-size: 90%;
+    }
+}
+
+.ratings {
+    display: inline-block;
+    padding: 10px;
+    float: left;
+    width: 100%;
+}
+
+.ratings-box {
+    width: 110px;
+    margin: auto;
+}
+
+@media (max-width: 575px) {
+    .author-img {
+        height: 200px;
+        width: 200px;
+        margin: auto;
+    }
+}
+
+.navbar-toggler span {
+    color: black !important;
+}

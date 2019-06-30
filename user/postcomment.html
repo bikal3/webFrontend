@@ -30,7 +30,7 @@
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark ">
         <a class="navbar-brand" style="color: #000;" href="userdashboard.html">Travel Nepal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+            <span class="fa fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
             <ul class="navbar-nav ml-auto">
@@ -56,25 +56,13 @@
     </nav>
     <!--Card image-->
 
+
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-12 col-lg-3 col-sm-12 col-12 mt-5">
-                <div class="card view-card">
-                    <div class="author-img">
-                        <img src="../images/person_1.jpg" class="img">
-                    </div>
-                    <div class="author-details p-4">
-                        <h3 id="username" class="username text-center" value=""> </h3>
-                        <p class="text-center">
-                            Kotha Smith is an enthusiastic and passionate Story Teller. He loves to do different home-made things and share to the world.
-                        </p>
-                    </div>
 
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-9 col-sm-12 col-12 mt-5">
-                <div class="view-img">
+            <div class="col-md-8 col-lg-9 col-sm-12 col-12 mt-5">
+                <div class="view">
                     <img src="" id="image" href="addpost.html" class="img" alt="photo">
                     <a href="#">
                         <div class="mask rgba-white-slight"></div>
@@ -89,7 +77,37 @@
                     <p class="card-text text-justify" id="description"></p>
                 </div>
             </div>
+            <div class="col-md-4 col-lg-3 col-sm-12 col-12 mt-5">
+                <div class="card view-card">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-4 mt-sm-5 mt-md-0">
+                            <div class="author-img">
+                                <img src="" id="userprofileimage" class="img">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-8">
+                            <div class="author-details p-4">
+                                <h3 id="username" class="username text-center" value=""> </h3>
+                                <p class="text-center">
+                                    Kotha Smith is an enthusiastic and passionate Story Teller. He loves to do different home-made things and share to the world.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="card view-card ratings mt-3">
+                    <div class="ratings-box">
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
 
 
@@ -98,13 +116,13 @@
 
     </div>
     <!--/.Card-->
-
+    <!--/.Card-->
     <div class="mt-5"></div>
     <div class="container-fluid">
         <h2 class="page-header">Comments</h2>
     </div>
 
-    <div id="comment"></div>
+
 
     <div class="container-fluid">
         <form id="commentform">
@@ -118,6 +136,8 @@
                 </div>
             </div>
         </form>
+        <hr>
+        <div id="comment"></div>
     </div>
     <footer>
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
@@ -169,28 +189,32 @@
                 dataType: 'JSON',
                 success: function(response) {
                     console.log(response);
-                    $('#username').html(response.post.user);
+                    $('#username').html(response.post.user.username);
                     $('#location').html(response.post.location);
                     $('#description').html(response.post.description);
                     $('#image').attr("src", "http://localhost:5000/" + response.post.image);
+                    $('#userprofileimage').attr("src", "http://localhost:5000/" + response.post.user.image);
+                    // console.log(response.)
+
                     var datas = "";
                     $.each(response.comments, function(index) {
 
                         datas += "<div class='container-fluid'>";
                         datas += "<div class='row'>";
-                        datas += "<div class='col-md-8'>";
+                        datas += "<div class='col-md-12'>";
                         datas += "<section class='comment-list'>";
                         datas += "<article class='row'>";
-                        datas += "<div class='col-md-1 col-sm-1 hidden-xs'>";
-                        datas += "<figure class='thumbnail'>";
-                        datas += "<img class='img-fluid' src='../images/userprofile.png' />";
-                        datas += "<figcaption class='text-center'>" + response.comments[index].username + "</figcaption>";
-                        datas += "</figure>";
-                        datas += " </div>";
-                        datas += "<div class='col-md-10 col-sm-10'>";
-                        datas += "<div class='card arrow left'>";
-                        datas += "<div class='card-body'>";
-                        datas += "<p>" + response.comments[index].comment + " </p>";
+
+                        datas += "<div class='thumbnail'>";
+                        datas += "<img src = 'http://localhost:5000/" + response.comments[index].user.image + "' class = 'thumbnail-img' />";
+                        datas += "</div>";
+
+                        datas += "<div class='col-md-8 col-sm-8 col-8'>";
+
+                        datas += "<div class='arrow left mb-5'>";
+                        datas += "<div class=''>";
+                        datas += "<figcaption class='text-left comment-username'>" + response.comments[index].user.username + "</figcaption>";
+                        datas += "<p class = 'text-justify'>" + response.comments[index].comment + " </p>";
                         datas += " </div>";
                         datas += " </div>";
                         datas += " </div>";
@@ -228,16 +252,16 @@
                     success: function(response) {
                         // _form[0].reset();
                         console.log(response);
-                        alert("hurray")
-                            // if (response.redirect !== undefined && response.redirect) {
-                            //     window.location.href = response.redirect_url;
-                            // }
+
+                        // if (response.redirect !== undefined && response.redirect) {
+                        //     window.location.href = response.redirect_url;
+                        // }
                         location.href = "postcomment.html?id=" + post_id;
                     },
                     error: function(error) {
                         console.log(error);
 
-                        alert("laa vayena aabo k garne")
+                        alert(error.responseText);
                     }
                 })
             })

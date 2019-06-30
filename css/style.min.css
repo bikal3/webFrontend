@@ -31,8 +31,14 @@
     }
 }
 
+.wrapper {
+    padding-left: 206px !important;
+}
+
+
+/* 
 @media (max-width:1199.98px) {
     .sidebar-fixed {
         display: none
     }
-}
+} */
