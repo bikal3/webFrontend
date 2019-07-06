@@ -88,8 +88,8 @@
                         <div class="col-md-12 col-sm-8">
                             <div class="author-details p-4">
                                 <h3 id="username" class="username text-center" value=""> </h3>
-                                <p class="text-center">
-                                    Kotha Smith is an enthusiastic and passionate Story Teller. He loves to do different home-made things and share to the world.
+                                <p class="text-center" id="desc">
+
                                 </p>
                             </div>
                         </div>
@@ -192,6 +192,7 @@
                     $('#username').html(response.post.user.username);
                     $('#location').html(response.post.location);
                     $('#description').html(response.post.description);
+                    $('#desc').html(response.post.user.desc);
                     $('#image').attr("src", "http://localhost:5000/" + response.post.image);
                     $('#userprofileimage').attr("src", "http://localhost:5000/" + response.post.user.image);
                     // console.log(response.)
@@ -227,7 +228,7 @@
                     $("#comment").append(datas);
                 },
                 error: function() {
-                    alert("vayena")
+                    alert("Eroor Occured")
                 }
             });
             $("#commentform").submit(function(e) {

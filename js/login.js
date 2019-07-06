@@ -13,14 +13,9 @@ $(document).ready(function() {
                 $(".lbl_status").hide();
             },
             success: function(response) {
-                // alert("a");
                 console.log(response);
                 $('#login')[0].reset();
-                $(".modal-content").addClass("active");
-                // document.getElementById("check").innerHTML = response.message;
-                //ADD THIS CODE
                 setTimeout(function() {
-                    // document.getElementById("check").innerHTML = "";
                     if (response.Success == "Success!") {
                         console.log(response.admin)
 
@@ -29,7 +24,6 @@ $(document).ready(function() {
                             localStorage.setItem("admin", response.admin);
                             localStorage.setItem("username", response.username);
                             localStorage.setItem("_id", response._id);
-                            $(".modal-content").removeClass("active");
                         } else {}
                         if (response.admin == true) {
                             $('<a href="admin/dashboard.html" id="aa"></a>').appendTo("body");
@@ -65,20 +59,13 @@ $(document).ready(function() {
             },
             success: function(response) {
                 alert("You are registered now");
-                //console.log(response.Success);
                 $('#signup')[0].reset();
-
-                $(".modal-content").addClass("active");
-                // document.getElementById("check").innerHTML = response.Success;
-                //ADD THIS CODE
-                setTimeout(function() {
-
-                    // document.getElementById("check").innerHTML = "";
+                setTimeout(function(err,response) {
                     if (response.Success == "You are regestered,You can login now.") {
                         $('<a href="index.html" id="aa"></a>').appendTo("body");
                         document.getElementById("aa").click();
                     } else {
-                        $(".modal-content").removeClass("active");
+                        console.log(err);
                     }
                 });
                 setTimeout(function() {

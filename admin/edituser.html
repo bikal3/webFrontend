@@ -2,27 +2,25 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Material Design Bootstrap</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <!-- Material Design Bootstrap -->
-    <link href="../css/mdb.min.css" rel="stylesheet">
+    <link href="../css/mdb.min.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
-    <link href="../css/style.min.css" rel="stylesheet">
+    <link href="../css/style.min.css" rel="stylesheet" />
 </head>
 
 <body class="grey lighten-3">
-
     <!-- Sidebar -->
     <div class="sidebar-fixed position-fixed">
-
         <a class="logo-wrapper waves-effect">
-            <img src="" class="img-fluid" alt="">
+            <img src="" class="img-fluid" alt="" />
         </a>
 
         <div class="list-group list-group-flush">
@@ -38,7 +36,6 @@
             <a href="#" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-money-bill-alt mr-3"></i>Setting</a>
         </div>
-
     </div>
     <div class="container-fluid" style="border:1px solid #cecece;">
         <div class="container">
@@ -49,28 +46,29 @@
                 </h2>
             </div>
             <form id="updateuserform" method="POST">
-                <input type="hidden" id="_id" name="_id" value="">
+                <input type="hidden" id="_id" name="_id" value="" />
                 <fieldset>
                     <div class="modal-body">
                         <div class="md-form form-sm mb-5">
                             <i class="fas fa-user-tie prefix"></i>
-                            <input type="text" placeholder="Your name " id="name" name="name" value="" class="form-control form-control-sm validate">
+                            <input type="text" placeholder="Your name " id="name" name="name" value="" class="form-control form-control-sm validate" />
                             <label data-error="wrong" data-success="right" class="lbl_status"></label>
                         </div>
                         <div class="md-form form-sm mb-5">
                             <i class="fas fa-envelope prefix"></i>
-                            <input type="email" placeholder="Your email" id="email" name="email" value="" class="form-control form-control-sm validate">
+                            <input type="email" placeholder="Your email" id="email" name="email" value="" class="form-control form-control-sm validate" />
                             <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
                         </div>
                         <div class="md-form form-sm mb-5">
                             <i class="fas fa-user prefix"></i>
-                            <input type="text" placeholder="Username" id="username" name="username" value="" class="form-control form-control-sm validate">
+                            <input type="text" placeholder="Username" id="username" name="username" value="" class="form-control form-control-sm validate" />
                             <label data-error="wrong" data-success="right" class="lbl_status" for="modalLRInput12"></label>
                         </div>
                         <div class="text-center form-sm mt-2">
-                            <button class="btn btn-info" type="submit">Update<i class="fas fa-sign-in ml-1"></i></button>
+                            <button class="btn btn-info" type="submit">
+                  Update<i class="fas fa-sign-in ml-1"></i>
+                </button>
                         </div>
-
                     </div>
                 </fieldset>
             </form>
@@ -88,58 +86,59 @@
         $(document).ready(function() {
             var id = "";
             var searchParams = new URLSearchParams(window.location.search);
-            if (searchParams.has('id')) {
-                id = searchParams.get('id');
+            if (searchParams.has("id")) {
+                id = searchParams.get("id");
             }
             var data = {
-                'token': localStorage.getItem("token"),
-                'id': localStorage.getItem("_id"),
-                '_id': id
+                token: localStorage.getItem("token"),
+                id: localStorage.getItem("_id"),
+                _id: id
             };
             $.ajax({
-                type: 'POST',
-                url: 'http://127.0.0.1:5000/api/admin/useredit/',
+                type: "POST",
+                url: "http://127.0.0.1:5000/api/admin/useredit/",
                 data: data,
                 success: function(response) {
                     // console.log(response);
-                    $('#name').val(response.name);
-                    $('#email').val(response.email);
-                    $('#username').val(response.username);
-                    $('#password').val(response.password);
-                    $('#passwordConf').val(response.passwordConf);
+                    $("#name").val(response.name);
+                    $("#email").val(response.email);
+                    $("#username").val(response.username);
+                    $("#password").val(response.password);
+                    $("#passwordConf").val(response.passwordConf);
                 },
                 error: function() {}
-            })
+            });
             $("#updateuserform").submit(function(event) {
                 event.preventDefault();
                 var _form = $(this);
                 var id = "";
                 var searchParams = new URLSearchParams(window.location.search);
-                if (searchParams.has('id')) {
-                    id = searchParams.get('id');
-                };
-                var update = { //Fetch form data
+                if (searchParams.has("id")) {
+                    id = searchParams.get("id");
+                }
+                var update = {
+                    //Fetch form data
 
-                    'token': localStorage.getItem("token"),
-                    'id': localStorage.getItem("_id"),
-                    '_id': id,
-                    'username': $('input[name=username]').val(),
-                    'email': $('input[name=email]').val(),
-                    'name': $('input[name=name]').val()
+                    token: localStorage.getItem("token"),
+                    id: localStorage.getItem("_id"),
+                    _id: id,
+                    username: $("input[name=username]").val(),
+                    email: $("input[name=email]").val(),
+                    name: $("input[name=name]").val()
                 };
                 $.ajax({
-                    type: 'PUT',
-                    url: 'http://127.0.0.1:5000/api/admin/userupdate/',
+                    type: "PUT",
+                    url: "http://127.0.0.1:5000/api/admin/userupdate/",
                     data: update,
                     success: function(response) {
                         console.log(response);
                     },
                     error: function() {
-                        alert("update failed")
+                        alert("update failed");
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     </script>
 </body>
 

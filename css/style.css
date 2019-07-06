@@ -1813,3 +1813,8 @@ footer p {
 .navbar-toggler span {
     color: black !important;
 }
+
+.img-thumbnail {
+    width: 150px;
+    height: auto;
+}
