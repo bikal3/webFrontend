@@ -67,12 +67,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="" class="img-circle" id="imgProfile" alt="User Image">
+                        <img src="img/photo.jpg" class="img-circle" id="imgProfile" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p id="adminname"></p>
                         <!-- Status -->
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        <a href="profile.html"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
 
@@ -90,8 +90,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </span>
           </a>
                         <ul class="treeview-menu">
-                            <li><a href="profile.html"><i class="fa fa-user"></i> <span>profile</span></a></li>
-                            <li><a id="logout" href="javascript:void(0);"><i class="fa fa-sign-out"></i> <span>logout</span></a></li>
+                            <li><a href="#"><i class="fa fa-user"></i> <span>profile</span></a></li>
+                            <li><a href="#"><i class="fa fa-sign-out"></i> <span>logout</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -117,29 +117,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="box-header">
                                 <h3 class="box-title">User Table</h3>
 
-                                <div class="box-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
-                                        <div class="input-group-btn">
-                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tr>
                                         <th>SN</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
+                                        <th>Title</th>
+                                        <th>Location</th>
                                         <th>Username</th>
                                         <th>Description</th>
-                                        <th>Message</th>
+                                        <th>Image</th>
+                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                     <tbody id="tabledata"></tbody>
+                                    <!-- <tr>
+                                        <td>1</td>
+                                        <td>John Doe</td>
+                                        <td>johndoe@email.com</td>
+                                        <td>johndoe</td>
+                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td class="img-td"><img src='img/photo.jpg' class="img-thumbnail"></td>
+                                        <td> <a href="#" class='btn btn-primary'><i class='fa fa-edit fa-lg' aria-hidden='true'></i></a></td>
+                                        <td><button type='button' class='btn btn-danger' id='delete'><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>
+                                    </tr> -->
                                 </table>
                             </div>
                             <!-- /.box-body -->
@@ -165,7 +168,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
         <script src="js/adminlte.min.js"></script>
-        <script src="../js/logout.js"></script>
         <script src="../js/adminprofile.js"></script>
 
         <script>
@@ -174,28 +176,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 var data = { //Fetch form data
                     token: localStorage.getItem("token"),
                     id: localStorage.getItem("_id"),
-                    tok: localStorage.getItem("token")
 
                 };
 
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://127.0.0.1:5000/api/admin/contactlist/',
+                    url: 'http://127.0.0.1:5000/api/admin/postlist/',
                     data: data,
                     success: function(res) {
                         var datas = "";
                         $.each(res, function(index) {
                             datas += "<tr>";
-                            datas += "<td>" + res[index].fname + "</td>";
-                            datas += "<td>" + res[index].fname + "</td>";
-                            datas += "<td>" + res[index].lname + "</td>";
-                            datas += "<td>" + res[index].email + "</td>";
-                            datas += "<td>" + res[index].subject + "</td>";
-                            datas += "<td>" + res[index].message + "</td>";
-                            datas += "<td><button  type='button' class='btn btn-danger' id='delete' value=" + res[index]._id + "><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>";
+                            datas += "<td>" + res[index].SN + "</td>";
+                            datas += "<td>" + res[index].title + "</td>";
+                            datas += "<td>" + res[index].location + "</td>";
+                            datas += "<td>" + res[index].user.username + "</td>";
+                            datas += "<td>" + res[index].description + "</td>";
+                            datas += "  <td class='img-td'><img src='http://localhost:5000/" + res[index].image + "'class='img-thumbnail'></td>";
+                            datas += "<td> <a href='editpost.html?id=" + res[index]._id + "'class='btn btn-primary'><i class='fa fa-edit fa-lg' aria-hidden='true'></i></a></td>";
+                            datas += "<td><button   type='button' class='btn btn-danger' id='delete' value=" + res[index]._id + "><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>";
                             datas += "</tr>";
                         });
+                        // datas += " </table>";
                         $("#tabledata").append(datas);
                         $("#tabledata").on('click', '#delete', function() {
                             var data = {
@@ -205,13 +208,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             };
                             $.ajax({
                                 type: "POST",
-                                url: "http://127.0.0.1:5000/api/admin/contactdelete/",
+                                url: "http://127.0.0.1:5000/api/admin/postdelete/",
                                 data: data,
                                 success: function(responseData, textStatus, jqXHR) {
                                     console.log(responseData);
                                     alert(responseData.message);
                                     console.log(data);
-                                    location.href = "feedback.html"
+                                    location.href = "post.html"
 
                                 },
                                 error: function(jqXHR, textStatus, errorThrown) {
@@ -234,6 +237,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             });
         </script>
+
+        <!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
 </body>
 
 </html>

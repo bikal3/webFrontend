@@ -26,6 +26,7 @@
         
         input[type=file] {
             padding: 10px;
+            margin-left: 15px;
             /* background: #2d2d2d; */
         }
     </style>
@@ -47,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: #000;" href="postcomment.html">
+                    <a class="nav-link" style="color: #000;" href="userdashboard.html">
                         <i class="fab fa-instagram"></i> Post</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -79,8 +80,9 @@
                     <div class="row form-group">
                         <!-- <input type='file' onchange="readURL(this);" />
                         <img id="blah" src="http://placehold.it/180" alt="your image" /> -->
-                        <div class="col-md-6"> <img id="blah" src="http://placehold.it/180" alt="your image" /></div>
-                        <div><input type='file' onchange="readURL(this);" name="image" id="image" /></div>
+                        <div class="col-md-6"> <img id="blah" src="../images/postdefault-image.jpg" alt="your image" /></div>
+                        <!-- <div><input type='file' onchange="readURL(this);" name="image" id="image" /></div> -->
+                        <input type="file" onchange="readURL(this);" id="image" name="image" class="btn btn-primary" id="btnChangePicture" value="" />
                     </div>
                     <div class="row form-group">
 
@@ -120,6 +122,12 @@
     <footer>
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
             <a href="https://mdbootstrap.com/education/bootstrap/" style="color: whitesmoke"> info@travelnepal.com</a>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick" />
+                <input type="hidden" name="hosted_button_id" value="D5Q5YYZ256XDN" />
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+            </form>
         </div>
         <ul>
             <a href="#" class="pl-0 pr-3" style="color: white"><i class="fab fa-facebook fa-2x"></i></i></a>
