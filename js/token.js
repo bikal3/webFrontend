@@ -3,9 +3,4 @@ $(document).ready(function() {
         $('<a href="../index.html" id="aa"></a>').appendTo("body");
         document.getElementById("aa").click();
     }
-    $("#logout").click(function() {
-        localStorage.setItem("token", "");
-        $('<a href="../index.html" id="aa"></a>').appendTo("body");
-        document.getElementById("aa").click();
-    });
 });

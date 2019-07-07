@@ -33,7 +33,7 @@ $(document).ready(function() {
 
                         document.getElementById("aa").click();
                     } else {
-                        $(".modal-content").removeClass("active");
+                        alert("Email or Password doesn't match")
                     }
                 });
                 setTimeout(function() {
@@ -60,7 +60,7 @@ $(document).ready(function() {
             success: function(response) {
                 alert("You are registered now");
                 $('#signup')[0].reset();
-                setTimeout(function(err,response) {
+                setTimeout(function(err, response) {
                     if (response.Success == "You are regestered,You can login now.") {
                         $('<a href="index.html" id="aa"></a>').appendTo("body");
                         document.getElementById("aa").click();
