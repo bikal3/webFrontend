@@ -123,13 +123,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tr>
-                                        <th>SN</th>
                                         <th>Title</th>
                                         <th>Location</th>
                                         <th>Username</th>
                                         <th>Description</th>
                                         <th>Image</th>
-                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                     <tbody id="tabledata"></tbody>
@@ -168,75 +166,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
         <script src="js/adminlte.min.js"></script>
+        <script src="js/adminpost.js"></script>
         <script src="../js/adminprofile.js"></script>
-
-        <script>
-            var tok;
-            $(document).ready(function() {
-                var data = { //Fetch form data
-                    token: localStorage.getItem("token"),
-                    id: localStorage.getItem("_id"),
-
-                };
+        <script type="text/javascript" src="../js/token.js"></script>
 
 
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://127.0.0.1:5000/api/admin/postlist/',
-                    data: data,
-                    success: function(res) {
-                        var datas = "";
-                        $.each(res, function(index) {
-                            datas += "<tr>";
-                            datas += "<td>" + res[index].SN + "</td>";
-                            datas += "<td>" + res[index].title + "</td>";
-                            datas += "<td>" + res[index].location + "</td>";
-                            datas += "<td>" + res[index].user.username + "</td>";
-                            datas += "<td>" + res[index].description + "</td>";
-                            datas += "  <td class='img-td'><img src='http://localhost:5000/" + res[index].image + "'class='img-thumbnail'></td>";
-                            datas += "<td> <a href='editpost.html?id=" + res[index]._id + "'class='btn btn-primary'><i class='fa fa-edit fa-lg' aria-hidden='true'></i></a></td>";
-                            datas += "<td><button   type='button' class='btn btn-danger' id='delete' value=" + res[index]._id + "><i class='fa fa-trash fa-lg' aria-hidden='true'></i></button></td>";
-                            datas += "</tr>";
-                        });
-                        // datas += " </table>";
-                        $("#tabledata").append(datas);
-                        $("#tabledata").on('click', '#delete', function() {
-                            var data = {
-                                _id: $(this).val(),
-                                token: localStorage.getItem("token"),
-                                id: localStorage.getItem("_id")
-                            };
-                            $.ajax({
-                                type: "POST",
-                                url: "http://127.0.0.1:5000/api/admin/postdelete/",
-                                data: data,
-                                success: function(responseData, textStatus, jqXHR) {
-                                    console.log(responseData);
-                                    alert(responseData.message);
-                                    console.log(data);
-                                    location.href = "post.html"
-
-                                },
-                                error: function(jqXHR, textStatus, errorThrown) {
-                                    console.log(errorThrown);
-                                    alert(errorThrown);
-                                }
-
-                            });
-                            return false;
-
-                        })
-                        console.log(res);
-                    },
-
-                    error: function() {
-                        document.getElementById("table_data").innerHTML = "No data Available";
-                    }
-                });
-
-
-            });
-        </script>
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
