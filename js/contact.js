@@ -9,10 +9,9 @@ $(document).ready(function() {
             data: $('#form1').serialize(),
             dataType: "json",
             success: function(response) {
+                alert("Successfully Send Message")
                 console.log(response);
-                // $('#form1')[0].reset();
-                // console.log(response);
-                // $("#check").html(response.Success).addClass("alert");
+                location.reload();
 
             },
             error: function() {}

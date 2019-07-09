@@ -90,6 +90,7 @@ $(document).ready(function() {
                 'name': $('input[name=name]').val(),
                 'desc': $('input[name=desc]').val()
 
+
             };
         } else {
             var dataupdate = {

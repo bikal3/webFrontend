@@ -17,7 +17,6 @@ $(document).ready(function() {
             $.each(res, function(index) {
                 datas += "<tr>";
                 datas += "<td>" + res[index].fname + "</td>";
-                datas += "<td>" + res[index].fname + "</td>";
                 datas += "<td>" + res[index].lname + "</td>";
                 datas += "<td>" + res[index].email + "</td>";
                 datas += "<td>" + res[index].subject + "</td>";
