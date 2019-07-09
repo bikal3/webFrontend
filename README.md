@@ -12,7 +12,9 @@ HTML, CSS ,JS and jQuery is being used to build this project. All the folder are
 in their respective folder.Images are kept on images folders. There are two user types one is admin and another is user . This two
 user type are also kept on different folder with thier respective folders. So the folder is manage in this way which is also 
 shown below 
+
 Folder Structure
+
 ![image](https://user-images.githubusercontent.com/38384981/60881457-7e8bd280-a265-11e9-9009-516127fdba6d.png)
 
 Tree Diagram
